@@ -1,0 +1,1 @@
+# Atividade de Criação de um lambda com API gateway na AWS em python com Flask (deve ter testes unitários) que receba em um endpoint via REST mensagens com autenticação.
