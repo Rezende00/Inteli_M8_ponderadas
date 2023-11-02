@@ -24,6 +24,11 @@ Atividade desenvolvida nesse repositório consiste na criação de um docker-com
 
 - Outras bibliotecas Python:
     - Além do Confluent-Kafka, você mencionou o uso de outras bibliotecas Python que provavelmente desempenham funções específicas no seu projeto. Essas bibliotecas podem incluir módulos de processamento de dados, manipulação de configurações ou interações com outros sistemas.
+ 
+- API League of Legends:
+    - Uma API que possui diversas fontes de dados em que se pode coletar diferentes coisas. A que foi utilizada nesse projeto foi de "Summoner-V4" - "/lol/match/v5/matches/by-puuid/{puuid}/ids"
+    - Vale lembrar que tem que ter uma chave autenticadora (que reseta a cada 24hrs) para o uso da API.
+    - Como utilizar: https://www.youtube.com/watch?v=jkzq9j5yeT8&list=TLPQMDIxMTIwMjMC1bewSS2WKA&index=1&ab_channel=iTeroGaming
 
 ## Pré-requisitos para execução
 
@@ -70,11 +75,21 @@ Para rodá-lo, basta execcutar as células do notebook.
     - O producer.ipynb é um notebook em Python que se conecta a um tópico Kafka e produz mensagens nesse tópico. Ele lê as mensagens da API da Riot em JSON e as envia para o tópico Kafka.
 Para rodá-lo, basta execcutar as células do notebook.
 
+## Parâmetros utilizados no docker-compose
+Os parâmetros inseridos no arquivo de **`docker-compose.yaml`** são estruturados e divididos entre:
+- Parametrização do Zookeeper;
+- Parametrização do Kafka-broker;
+- Criação de um tópico (boas práticas de organização de mensageria).
+
++ É possível visualizar os comentários dentro do próprio arquivo, para que seja mais fácil a compreenção do porquê foi usado e buildado cada componente. 
+
 ## Resultados esperados
 1. Inicializar o docker-compose.yml e verificar se inicializou todos os containers e serviços.
 2. Executar o consumer.py e verificar se o mesmo está esperando para consumir as mensagens do producer.py.
 3. Executar o producer.py e verificar se o mesmo está produzindo as mensagens e se o consumer.py está consumindo as mensagens.
 4. Verificar se as mensagens estão sendo consumidas corretamente pela célula do notebook.
+
+- O ideal é o consumer receber os dados do perfil de League of Legends
 
 ## Referências
 1. API da Riot Games: https://developer.riotgames.com/apis#match-v5/
