@@ -1,66 +1,67 @@
-version: "3"
+version: "3"  # Versão do arquivo de configuração do Docker Compose
 
-services:
-  zookeeper:
-    image: confluentinc/cp-zookeeper:5.4.0
-    hostname: zookeeper
-    container_name: zookeeper
+services:  # Definição dos serviços Docker
+
+  zookeeper:  # Configuração do serviço ZooKeeper
+    image: confluentinc/cp-zookeeper:5.4.0  # Imagem Docker a ser usada para o serviço
+    hostname: zookeeper  # Nome do host do contêiner
+    container_name: zookeeper  # Nome do contêiner
     ports:
-      - "2181:2181"
+      - "2181:2181"  # Mapeamento da porta 2181 do host para a porta 2181 do contêiner
     environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_TICK_TIME: 2000
+      ZOOKEEPER_CLIENT_PORT: 2181  # Porta do cliente ZooKeeper
+      ZOOKEEPER_TICK_TIME: 2000  # Intervalo de tempo para o relógio do ZooKeeper
     volumes:
-      - zookeeper_data:/var/lib/zookeeper/data
-      - zookeeper_log:/var/lib/zookeeper/log
+      - zookeeper_data:/var/lib/zookeeper/data  # Volume para armazenar dados do ZooKeeper
+      - zookeeper_log:/var/lib/zookeeper/log  # Volume para armazenar logs do ZooKeeper
 
-  kafka-broker:
-    image: confluentinc/cp-server:5.4.0
-    hostname: kafka-broker
-    container_name: kafka-broker
+  kafka-broker:  # Configuração do serviço Kafka
+    image: confluentinc/cp-server:5.4.0  # Imagem Docker a ser usada para o serviço
+    hostname: kafka-broker  # Nome do host do contêiner
+    container_name: kafka-broker  # Nome do contêiner
     depends_on:
-      - zookeeper
+      - zookeeper  # Dependência em relação ao serviço ZooKeeper
     ports:
-      - "29092:29092"
-      - "9092:9092"
+      - "29092:29092"  # Mapeamento da porta 29092 do host para a porta 29092 do contêiner
+      - "9092:9092"  # Mapeamento da porta 9092 do host para a porta 9092 do contêiner
     environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-broker:29092,PLAINTEXT_HOST://localhost:9092
-      KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
-      KAFKA_CONFLUENT_LICENSE_TOPIC_REPLICATION_FACTOR: 1
-      CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: kafka-broker:29092
-      CONFLUENT_METRICS_REPORTER_ZOOKEEPER_CONNECT: zookeeper:2181
-      CONFLUENT_METRICS_REPORTER_TOPIC_REPLICAS: 1
-      CONFLUENT_METRICS_ENABLE: "true"
-      CONFLUENT_SUPPORT_CUSTOMER_ID: "anonymous"
+      KAFKA_BROKER_ID: 1  # ID do broker Kafka
+      KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"  # Endereço do ZooKeeper
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT  # Mapeamento de protocolos de segurança
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-broker:29092,PLAINTEXT_HOST://localhost:9092  # Listeners anunciados
+      KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter  # Relatório de métricas
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1  # Fator de replicação do tópico de offsets
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0  # Atraso inicial do rebalanceamento de grupos
+      KAFKA_CONFLUENT_LICENSE_TOPIC_REPLICATION_FACTOR: 1  # Fator de replicação do tópico de licenças Confluent
+      CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: kafka-broker:29092  # Servidores de bootstrap para o relatório de métricas
+      CONFLUENT_METRICS_REPORTER_ZOOKEEPER_CONNECT: zookeeper:2181  # Conexão com o ZooKeeper para o relatório de métricas
+      CONFLUENT_METRICS_REPORTER_TOPIC_REPLICAS: 1  # Réplicas do tópico de métricas
+      CONFLUENT_METRICS_ENABLE: "true"  # Habilitar o relatório de métricas
+      CONFLUENT_SUPPORT_CUSTOMER_ID: "anonymous"  # ID do cliente Confluent
     volumes:
-      - kafka_broker:/var/lib/kafka/data
+      - kafka_broker:/var/lib/kafka/data  # Volume para armazenar dados do Kafka
 
-  create-topic:
-    image: confluentinc/cp-kafka:5.4.0
+  create-topic:  # Configuração do serviço para criar um tópico Kafka
+    image: confluentinc/cp-kafka:5.4.0  # Imagem Docker a ser usada para o serviço
     environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
-      KAFKA_CREATE_TOPICS: "atividade_kafka:1:1"
+      KAFKA_BROKER_ID: 1  # ID do broker Kafka
+      KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"  # Endereço do ZooKeeper
+      KAFKA_CREATE_TOPICS: "atividade_kafka:1:1"  # Comando para criar um tópico
     depends_on:
-      - zookeeper
-      - kafka-broker
+      - zookeeper  # Dependência em relação ao serviço ZooKeeper
+      - kafka-broker  # Dependência em relação ao serviço Kafka
     command:
-      - kafka-topics
-      - --create
-      - --topic
+      - kafka-topics  # Comando para interagir com tópicos Kafka
+      - --create  # Opção para criar um tópico
+      - --topic  # Nome do tópico a ser criado
       - atividade_kafka
-      - --partitions
+      - --partitions  # Número de partições do tópico
       - "1"
-      - --replication-factor
+      - --replication-factor  # Fator de replicação do tópico
       - "1"
-      - --if-not-exists
+      - --if-not-exists  # Criar apenas se o tópico não existir
 
-volumes:
-  zookeeper_data:
-  zookeeper_log:
-  kafka_broker:
+volumes:  # Definição de volumes Docker
+  zookeeper_data:  # Volume para armazenar dados do ZooKeeper
+  zookeeper_log:  # Volume para armazenar logs do ZooKeeper
+  kafka_broker:  # Volume para armazenar dados do Kafka
