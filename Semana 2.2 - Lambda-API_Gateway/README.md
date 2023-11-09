@@ -19,29 +19,30 @@ Este projeto é uma solução que integra o AWS Lambda com a AWS API Gateway, co
    Siga o passo a passo para dar start ao seu ambiente na AWS:
 
 - Acesse o Laboratório da AWS Academy e clique em Start Lab, após a conclusão do processo, clique em Open Console(bolinha verde).
-    ![Acesso ao Labs](a_start_aws.png)
+    ![Acesso ao Labs](https://github.com/Rezende00/Inteli_M8_ponderadas/blob/main/Semana%202.2%20-%20Lambda-API_Gateway/assets/a_start_aws.png)
 
 - Abrindo o console da aws academy, pesquise pelo serviço da Lambda:
-![console](a_start_aws.png)
+![console](https://github.com/Rezende00/Inteli_M8_ponderadas/blob/main/Semana%202.2%20-%20Lambda-API_Gateway/assets/b_console_aws.png)
    
 ### 2. Acesso ao serviço Lambda
 - Acesso ao serviço Lambda e clique em "Funções" no menu lateral esquerdo.
-![console](a_start_aws.png)
+![console](https://github.com/Rezende00/Inteli_M8_ponderadas/blob/main/Semana%202.2%20-%20Lambda-API_Gateway/assets/c_creation_lambdafunction.png)
 
 - Após isso, clique em "criar função", para criar uma função lambda e siga os passos abaixo para completar os campos necessários:
-![console](a_start_aws.png)
+![console](https://github.com/Rezende00/Inteli_M8_ponderadas/blob/main/Semana%202.2%20-%20Lambda-API_Gateway/assets/d_lambdafunction.png)
 
 ### 3. Criação de um Gatilho - API Gateway
 - Agora, faremos a criação de uma API Gateway, que será um gatilho da nossa função.
-![console](a_start_aws.png)
-![console](a_start_aws.png)
+![console](https://github.com/Rezende00/Inteli_M8_ponderadas/blob/main/Semana%202.2%20-%20Lambda-API_Gateway/assets/e_creating_apigateway.png)
+![console](https://github.com/Rezende00/Inteli_M8_ponderadas/blob/main/Semana%202.2%20-%20Lambda-API_Gateway/assets/f_trigger.png)
+![console](https://github.com/Rezende00/Inteli_M8_ponderadas/blob/main/Semana%202.2%20-%20Lambda-API_Gateway/assets/g_trigger_2.png)
 
 - Agora, será necessário fazer a configuração da API Gateway, para estabelecer a comunicação com a função lambda e estar de acordo com o que foi proposto no projeto.
-![console](a_start_aws.png)
-![console](a_start_aws.png)
+![console](https://github.com/Rezende00/Inteli_M8_ponderadas/blob/main/Semana%202.2%20-%20Lambda-API_Gateway/assets/h_apigateway.png)
+![console](https://github.com/Rezende00/Inteli_M8_ponderadas/blob/main/Semana%202.2%20-%20Lambda-API_Gateway/assets/i_apigateway_2.png)
+
 - Para selecionar qual a função lambda que será utilizada, copie o ARN da função lambda e cole no campo "Função Lambda":
-![console](a_start_aws.png)
-![console](a_start_aws.png)
+![console](https://github.com/Rezende00/Inteli_M8_ponderadas/blob/main/Semana%202.2%20-%20Lambda-API_Gateway/assets/j_arn.png)
 
 - Agora, você possui um endpoint da sua API Gateway, que será utilizado para fazer as requisições HTTP, além de já ter configurado ela para fazer requisições POST. Então, vamos testar?
 
@@ -49,13 +50,13 @@ Este projeto é uma solução que integra o AWS Lambda com a AWS API Gateway, co
 - IMPORTANTE: Verificar se a instalação do vscode está de acordo com o que foi proposto no pré-requisito.
 
 - Instalação da extensão Thunder Client
-![console](a_start_aws.png)
+![console](https://github.com/Rezende00/Inteli_M8_ponderadas/blob/main/Semana%202.2%20-%20Lambda-API_Gateway/assets/l_thunder_client.png)
 
 ### 5. Contrução do código da função lambda
 
 - A seguir, será apresentado o código da função lambda, que será utilizado para fazer a autenticação do usuário e senha, além de fazer o processamento de uma mensagem que será enviada e recebida pelo thunder client.
 
-![console](a_start_aws.png)
+![console](https://github.com/Rezende00/Inteli_M8_ponderadas/blob/main/Semana%202.2%20-%20Lambda-API_Gateway/assets/m_code.png)
 
 ```
 import base64
@@ -109,7 +110,7 @@ def lambda_handler(event, context):
 - Agora, vamos testar a função lambda, para isso, vamos utilizar o thunder client.
 
 - Primeiramente, vamos fazer uma requisição POST para o endpoint da API Gateway, para isso, copie o endpoint da API Gateway e cole no thunder client, além de selecionar o método POST.
-![console](endpoint.png)
+![console](https://github.com/Rezende00/Inteli_M8_ponderadas/blob/main/Semana%202.2%20-%20Lambda-API_Gateway/assets/k_api_post.png)
 
 - Disponibilizarei um body, com um json, para a requisição POST, que será utilizado para testar a função lambda.
 
@@ -119,18 +120,18 @@ def lambda_handler(event, context):
 }
 ```
 
-![console](post_thunder.png)
+![console](https://github.com/Rezende00/Inteli_M8_ponderadas/blob/main/Semana%202.2%20-%20Lambda-API_Gateway/assets/n_post.png)
 
 
 - Além disso, é necessário passar o Auth Basic, que será o usuário e senha, que foi definido na função lambda, para isso, clique em "Auth - Basic" e preencha os campos com o usuário e senha, respectivos, que foram apresentados no código.
 
-![console](auth_thunder.png)
+![console](https://github.com/Rezende00/Inteli_M8_ponderadas/blob/main/Semana%202.2%20-%20Lambda-API_Gateway/assets/o_auth.png)
 
 ### 7. Teste da função lambda
 
 - Com tudo preparado, basta clicar em "Send" e verificar o resultado da requisição.
 
-![console](final.png)
+![console](https://github.com/Rezende00/Inteli_M8_ponderadas/blob/main/Semana%202.2%20-%20Lambda-API_Gateway/assets/p_final.png)
 
 - PS: Caso o acesso dê "Acesso não autorizado", verifique se o usuário e senha estão corretos, além de verificar se o endpoint da API Gateway está correto.
 
@@ -147,9 +148,9 @@ python teste.py
 ```
 
 - Além disso, esterei disponibilizando prints, com a execução de testes dentro da AWS. Como por exemplo, uma simulação de um Acesso Não Autorizado:
-![console](a_start_aws.png)
-![console](a_start_aws.png)
-![console](a_start_aws.png)
+![console](https://github.com/Rezende00/Inteli_M8_ponderadas/blob/main/Semana%202.2%20-%20Lambda-API_Gateway/assets/q_teste_aws_1.png)
+![console](https://github.com/Rezende00/Inteli_M8_ponderadas/blob/main/Semana%202.2%20-%20Lambda-API_Gateway/assets/q_teste_aws_2.png)
+![console](https://github.com/Rezende00/Inteli_M8_ponderadas/blob/main/Semana%202.2%20-%20Lambda-API_Gateway/assets/q_teste_aws_3.png)
 
 # **Referências**
 - Algumas das prints demonstradas foram disponibilizadas pelo estudante e colega de trabalho, Lucas Britto.
