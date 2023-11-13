@@ -22,7 +22,7 @@ dez_cidades = ['São Paulo',
 url = "https://api.openweathermap.org/data/2.5/weather"
 
 parametros = {
-    'appid': '938f5fedf9c94467155a166c32992055',
+    'appid': '6d9d34c9d2f45611b182a33f1fb56e9a',
     'units': 'metric',
 }
 
@@ -66,10 +66,6 @@ def criar_tabela():
     return df
 
 @app.route('/')
-def api_start():
-    return 'API Flask aberta. Digite "/tempo" na URL para ver os dados de tempo, das cidades selecionadas.'
-
-@app.route('/tempo')
 def api_tempo():
     criar_tabela()
     conn = sqlite3.connect('dataWeather.db')
