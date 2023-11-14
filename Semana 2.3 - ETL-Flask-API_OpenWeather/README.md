@@ -7,7 +7,7 @@ Este projeto consiste em uma aplicação Flask que realiza uma ETL (Extração, 
 ## Requisitos
 
 - Python 3.6 ou superior
-- Instalação das dependências do arquivo requirements.txt (será dada instrução de instalação no tópico de <a name="configuração-do-projeto">configuração</a>)
+- Instalação das dependências do arquivo requirements.txt (será dada instrução de instalação no tópico de [configuração do projeto](#configuração-do-projeto))
 - Conta na API OpenWeather (https://openweathermap.org/api)
     - É necessário gerar uma chave de API para realizar as requisições. Para isso, basta criar uma conta no site e acessar a página de gerenciamento de chaves (https://home.openweathermap.org/api_keys). A chave gerada deve ser inserida no arquivo app.py, na variável API_KEY.
     - Porém, caso não queira utilizar uma chave própria, basta utilizar a chave já inserida no arquivo app.py. Ela é válida para requisições de teste.
@@ -44,7 +44,7 @@ Esta função realiza a transformação dos dados obtidos pela função coletar_
 ### Testes de integração
 Os testes de integração são implementados utilizando a biblioteca pytest. Eles abrangem cenários de sucesso para as funções coletar_dados, limpar_tabela e criar_tabela, além de um teste simples de resposta do JSON. Para executar os testes, basta executar o comando `pytest` no terminal junto com o arquivo de testes `test_app.py`.
 
-## [Configuração do Projeto](#configuração-do-projeto)
+## <a name="configuração-do-projeto">Configuração do Projeto</a>
 Certifique-se de ter o Python instalado de acordo com os requisitos do projeto. Além disso, após baixar o projeto em seu computador, sugere-se a criação de um ambiente virtual para a instalação das dependências. Para isso, basta executar o seguinte comando no terminal:
 ```python
 python -m venv venv
