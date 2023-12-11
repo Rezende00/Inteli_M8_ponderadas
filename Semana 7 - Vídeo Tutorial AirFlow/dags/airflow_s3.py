@@ -107,6 +107,10 @@ list_files_task = PythonOperator(
     dag=dag,
 )
 
+def remove_special_characters(df):
+    df = df.applymap(lambda x: ''.join(e for e in x if e.isalnum() or e.isspace()) if isinstance(x, str) else x)
+    return df
+
 def preprocess_file(**kwargs):
     ti = kwargs['ti']
     chosen_bucket = ti.xcom_pull(task_ids='choose_bucket')
@@ -124,8 +128,10 @@ def preprocess_file(**kwargs):
         s3_client.download_fileobj(Bucket=chosen_bucket, Key=chosen_file, Fileobj=f)
 
     df = pd.read_csv(chosen_file, encoding='latin1')
-
+    
     df = df.applymap(lambda x: x.lower() if isinstance(x, str) else x)
+
+    df = remove_special_characters(df)
 
     if df.isnull().values.any():
         print("Dados nulos encontrados. Preenchendo com 'N/A'...")
