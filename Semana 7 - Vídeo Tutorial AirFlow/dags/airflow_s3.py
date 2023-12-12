@@ -32,10 +32,6 @@ class S3Handler:
         response = self.client.list_buckets()
         return [bucket['Name'] for bucket in response.get('Buckets', [])]
 
-    def list_files_in_bucket(self, bucket):
-        response = self.client.list_objects(Bucket=bucket)
-        return [file['Key'] for file in response.get('Contents', [])]
-
 config = Config()
 s3_handler = S3Handler(config.aws_access_key_id, config.aws_secret_access_key, config.aws_region_name, config.aws_session_token)
 
