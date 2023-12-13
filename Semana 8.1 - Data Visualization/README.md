@@ -5,6 +5,7 @@
 [2. Descrição das Ferramentas e Escolha ](#c2)<br>
 [3. Configuração da Ferramenta](#c3) <br>
 [4. Criação de gráficos no Metabase](#c4)<br>
+[5. Análise dos dados](#c5)<br>
 
 #### **Barema**:
 
@@ -62,8 +63,7 @@ Após a análise comparativa entre as ferramentas, decidi escolher o **Metabase*
 
 ## <a name="c3">Configuração da Ferramenta</a>
 
-<img src="assets/Docker_icon.png" alt="PowerBI Icon" width="180">
-<img src="assets/metabase_icon.png" alt="PowerBI Icon" width="180">
+<img src="assets/Docker_icon.png" alt="PowerBI Icon" width="180"> <img src="assets/metabase_icon.png" alt="PowerBI Icon" width="180">
 
 ### Passo 1: Confirmação do WSL2 e Docker Desktop
 - Para seguir com esse tutorial, é necessário fazer a confirmação de que o WSL2 e o Docker Desktop estão instalados e funcionando corretamente. 
@@ -97,4 +97,44 @@ Após a análise comparativa entre as ferramentas, decidi escolher o **Metabase*
 
 ### Abrindo o MetaBase
 
-![Alt text](image.png)
+- Acesso à interface do Metabase
+![Alt text](assets/image-1.png)
+
+- Configurando a linguagem a ser utilizada
+![Alt text](assets/image-2.png)
+
+- Configure sua conta com login e senha para acessar o Metabase
+![Alt text](assets/image-3.png)
+
+- Escolha do tipo de banco de dados a ser utilizado
+![Alt text](assets/image-4.png)
+
+#### Configuração do banco de dados
+
+- Como é possível ver, o Metabase possui uma grande variedade de bancos de dados que podem ser utilizados. Para essa atividade, irei utilizar o banco de dados do Redshift, que é um banco de dados de data warehouse baseado em nuvem, que faz parte da família de produtos de serviços de nuvem da Amazon Web Services (AWS). Para efetuar essa conexão irei utilizar a conta do Metabase da turma de Sistemas da Informação, que já possui uma variedade de base de dadas tratadas.
+
+- Caso queira fazer acesso a outro banco de dados, de forma a acessar outros dados, irei deixar o link do tutorial de uma colega que fez a conexão manual: <a href="https://github.com/furlan2803/Grafico_Pipeline_Metabase/blob/main/README.md#acessando-o-metabase">"Tutorial Metabase - Giovanna Furlan"</a>.
+
+- Outro requisito, após a conexão com o banco de dados do Redshift, também é a importação de seus dados para o Metabase. Para isso, irei disponibilizar o link do tutorial de um colega que fez o passo a passo da importação desses dados: <a href="https://github.com/Lucasx369/Modulo-8/tree/main/Atividade%205#importar-dados-do-amazon-redshift">"Tutorial Metabase - Lucas Vieira"</a>.
+
+Tendo em vista todos esses aspectos, vamos para a criação dos gráficos.
+
+### Criação dos gráficos
+
+- Após você ter feito a conexão com o banco de dados e a importação dos dados, você irá acessar a opção "Novo" e depois em "Pergunta" para criar os gráficos.
+![Alt text](assets/image-5.png)
+
+- Após isso, temos que selecionar qual será o banco de dados que iremos utilizar para a criação dos gráficos. Irei selecionar o banco de dados `DataDream` e a base `tabela 6b 2017 2018` - que demonstra a situação da população brasileira, a partir de diversos aspectos.
+![Alt text](assets/image-6.png)
+
+- Depois de selecionar que dados iremos utilizar, temos que selecionar o que queremos ver com esses dados. Então, precisamos sumarizar os dados, para que possamos ter uma visão geral deles. Para isso, irei selecionar a opção "Sumarizar" e depois "Soma acumulativa" da coluna de Proporção de pessoas com algum Grau de Pobreza (%) por UF.
+![Alt text](assets/image-7.png)
+
+- Assim, nosso gráfico final fica da seguinte forma:
+![Alt text](assets/image-8.png)
+
+## <a name="c5"> Análise dos dados </a>
+
+- O porquê de eu ter selecionado tal base para a contrução desse gráfico, era para visualizar alguns dos estados que possuem maior proporção de nível de grau de pobreza. 
+- Como é possível analisar, o estado do Rio Grande do Norte possui a maior proporção de pessoas com algum grau de pobreza.
+- Porém, uma possível falha a se apresentar nesse gráfico, seria a encapsulação de 8 outros estados, que possuem uma proporção de pessoas com algum grau de pobreza maior que 50%. Sendo assim, a visualização desses estados fica prejudicada, pois não conseguimos visualizar a proporção de pessoas com algum grau de pobreza de cada um deles. Além do fato de que eles concentram essa proporção em uma única divisória, chamada 'Outros'.
