@@ -94,4 +94,4 @@ A configuração do pipeline e o processamento de dados com PySpark estão integ
 O agendamento e a execução de tarefas no Apache Airflow são gerenciados pela DAG. A DAG está configurada para ser executada diariamente. Para agendar outras tarefas, consulte a documentação oficial do Airflow.
 
 ### Executando o Tutorial - Vídeo
-Para uma demonstração visual de todo o processo, assista ao `vídeo tutorial` que acompanha este README.
+Para uma demonstração visual de todo o processo, assista ao <a href="https://clipchamp.com/watch/Cbn523dv9P4">'VÍDEO TUTORIAL'</a> que acompanha este README.
